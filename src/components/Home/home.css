@@ -1,0 +1,56 @@
+.vehicleEntry {
+    display: flex;
+    background: antiquewhite;
+    height: 50px;
+    align-items: center;
+}
+
+.log-entry {
+    justify-content: end;
+    display: flex;
+    width: 75%;
+}
+
+.vehicle-heading {
+    font-size: 23px;
+    margin: 0 14px;
+}
+
+.search-bar {
+    width: 50%;
+    padding: 0px 0px 0px 18px;
+    margin: 0 10px;
+    color: black;
+    font-weight: bold;
+
+}
+
+select{
+    width: 14%;
+    padding: 5px;
+    margin-right: 6px;
+
+}
+.table{
+    width: 100%;
+    margin: 4px 0 0 0;
+
+}
+
+.table tr td, .table tr th {
+    padding: 3px 1%;
+    max-width: 100px;
+    overflow-wrap: break-word;
+}
+
+.table tr th {
+    text-align: left;
+    padding: 10px;
+    background-color: #be5b5b;
+    color: #fff;
+    text-shadow: 1px 1px #000;
+}
+
+.table tr:nth-child(odd) {
+    background-color: #ffe2be;
+}
