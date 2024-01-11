@@ -19,7 +19,7 @@ export const addVehicleEntry = createSlice({
     addVehicleNum: (state, action) => {
       return { ...state, vehicleNumber: action.payload };
     },
-    addtoll: (state, action) => {
+    addtoll: (state) => {
       return state.count + 1;
     },
   },
