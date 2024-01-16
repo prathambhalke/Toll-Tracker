@@ -69,17 +69,6 @@
     align-items: center;
 }
 
-.vtype-btn{
-    background-color: blue;
-    color: white;
-    border: 1px solid white;
-    width: auto;
-    border-radius: 5px;
-    padding: 4px;
-    font-size: 19px;
-}
-
-
 .journey-span input {
     height: 20px;
     width: 20px;

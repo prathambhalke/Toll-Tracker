@@ -3,30 +3,32 @@ import { createSlice } from "@reduxjs/toolkit";
 export const addVehicleEntry = createSlice({
   name: "addVelEnt",
   initialState: {
-    count: 0,
     selectToll: "",
     vehicleType: "",
     vehicleNumber: "",
-    journeyType: {
-      singleJourney: "",
-      returnJourney: "",
-    },
+    journeyType: "single",
   },
   reducers: {
     addSelectToll: (state, action) => {
       return { ...state, selectToll: action.payload };
     },
+    addVehicleType: (state, action) => {
+      return { ...state, vehicleType: action.payload };
+    },
     addVehicleNum: (state, action) => {
       return { ...state, vehicleNumber: action.payload };
     },
-    addtoll: (state) => {
-      return state.count + 1;
+    addJourneyType: (state, action) => {
+      return {
+        ...state,
+        journeyType: action.payload,
+      };
     },
   },
 });
 
 // Action creator
-export const sliceActions = addVehicleEntry.actions;
+export const AddVehicleSliceActions = addVehicleEntry.actions;
 
 // Reducer
 export default addVehicleEntry.reducer;

@@ -1,22 +1,16 @@
-import { sliceActions } from "../../Features/AddVelEntrySlice";
+import { AddVehicleSliceActions } from "../../Features/AddVelEntrySlice";
+import { VehicleDataSliceActions } from "../../Features/addDataSlice";
 import "../vehicleEntry/Addentry.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 
 const AddVehicleEntry = () => {
-  const [selectedButton, setSelectedButton] = useState(null);
+  const VehicleTypeBtns = ["Car/Jeep", "Truck/Bus", "LCV", "Heavy vehicle"];
+  let vehicleList = useSelector((state) => state.addVelEnt);
+  let vehicleData = useSelector((state) => state.addVelData);
 
-  let vehicleList = useSelector((state) => state.addVelEnt); // Fixed the selector to use the correct slice name
   let dispatch = useDispatch();
   console.log(vehicleList);
-
-  const onSelectTollName = (e) => {
-    dispatch(sliceActions.addSelectToll(e.target.value));
-  };
-
-  const handleButtonClick = (buttonId) => {
-    setSelectedButton(buttonId);
-  };
+  console.log(vehicleData);
 
   return (
     <form action="" className="form-container">
@@ -28,7 +22,9 @@ const AddVehicleEntry = () => {
             className="select-tollname"
             name=""
             id=""
-            onChange={onSelectTollName}
+            onChange={(e) =>
+              dispatch(AddVehicleSliceActions.addSelectToll(e.target.value))
+            }
           >
             <option value="Select the toll Name">Select the toll Name</option>
             <option value="Latur">Latur</option>
@@ -43,48 +39,20 @@ const AddVehicleEntry = () => {
 
         <div className="Vtype">
           <label htmlFor="">Vehicle type</label>
-
           <div className="vtype-buttons">
-            <span
-              className="vtype-btn"
-              onClick={() => handleButtonClick(1)}
-              style={{
-                backgroundColor: selectedButton === 1 ? "blue" : "transparent",
-                color: selectedButton === 1 ? "black" : "white",
-              }}
-            >
-              Car/Jeep
-            </span>
-            <span
-              className="vtype-btn"
-              onClick={() => handleButtonClick(2)}
-              style={{
-                backgroundColor: selectedButton === 2 ? "blue" : "transparent",
-                color: selectedButton === 2 ? "black" : "white",
-              }}
-            >
-              Truck/Bus
-            </span>
-            <span
-              className="vtype-btn"
-              onClick={() => handleButtonClick(3)}
-              style={{
-                backgroundColor: selectedButton === 3 ? "blue" : "transparent",
-                color: selectedButton === 3 ? "black" : "white",
-              }}
-            >
-              LCV
-            </span>
-            <span
-              className="vtype-btn"
-              onClick={() => handleButtonClick(4)}
-              style={{
-                backgroundColor: selectedButton === 4 ? "blue" : "transparent",
-                color: selectedButton === 4 ? "black" : "white",
-              }}
-            >
-              Heavy vehicle
-            </span>
+            {VehicleTypeBtns.map((item, index) => {
+              return (
+                <p
+                  className="bg-blue-700 text-white rounded-lg p-4 mx-2 text-sm cursor-pointer hover:bg-white hover:text-black"
+                  key={index}
+                  onClick={() =>
+                    dispatch(AddVehicleSliceActions.addVehicleType(item))
+                  }
+                >
+                  {item}
+                </p>
+              );
+            })}
           </div>
         </div>
 
@@ -95,7 +63,9 @@ const AddVehicleEntry = () => {
               type="text"
               className="vehicle-number"
               placeholder="Vehicle Number"
-              onChange={() => console.log("thiss")}
+              onClick={(e) =>
+                dispatch(AddVehicleSliceActions.addVehicleNum(e.target.value))
+              }
             />
           </span>
         </div>
@@ -104,11 +74,23 @@ const AddVehicleEntry = () => {
           <label htmlFor="">Journey Type</label>
           <span className="journey-span">
             <span>
-              <input type="radio" />
+              <input
+                type="radio"
+                checked={vehicleList.journeyType === "single" ? true : false}
+                onClick={() =>
+                  dispatch(AddVehicleSliceActions.addJourneyType("single"))
+                }
+              />
               <label htmlFor="">single journey</label>
             </span>
             <span>
-              <input type="radio" />
+              <input
+                type="radio"
+                checked={vehicleList.journeyType === "double" ? true : false}
+                onClick={() =>
+                  dispatch(AddVehicleSliceActions.addJourneyType("double"))
+                }
+              />
               <label htmlFor="">return journey</label>
             </span>
           </span>
@@ -121,7 +103,10 @@ const AddVehicleEntry = () => {
           </span>
         </div>
 
-        <p className="add-btn" onClick={() => dispatch(sliceActions.addtoll())}>
+        <p
+          className="add-btn"
+          onClick={() => dispatch(VehicleDataSliceActions.addToll(vehicleList))}
+        >
           ADD
         </p>
       </div>
